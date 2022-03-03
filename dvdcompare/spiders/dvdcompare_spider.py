@@ -25,7 +25,7 @@ class DvdcompareSpiderSpider(scrapy.Spider):
         trs = response.css('#content>.col1-1 table tr')
         asin = response.css('#content>.col1-1 table .dvd')
         for i in trs:
-            yield {'url':response.url,'content':self.delete_join(i.css('.dvd div::text').getall()),'amazon_url':i.css('iframe::attr(src)').get()}
+            yield {'url':response.url,'content':self.delete_join(i.css('.dvd *::text').getall()),'amazon_url':i.css('iframe::attr(src)').get()}
 
     def delete_join(self,arr):
         de = map(lambda x:re.sub("[\r\n\t]","",x),arr)
